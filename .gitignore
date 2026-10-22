@@ -1,0 +1,4 @@
+jcc
+*.o
+a.out
+tests/out/
