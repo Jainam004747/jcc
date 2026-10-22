@@ -1,0 +1,3 @@
+// expect-error: void function cannot return a value
+void f() { return 1; }
+int main() { return 0; }
