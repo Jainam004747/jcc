@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build jcc
+        run: make
+      - name: Differential tests (jcc vs gcc)
+        run: make test
+      - name: Tests under AddressSanitizer + UBSan
+        run: make asan
+      - name: C bootcamp exercises
+        run: make -C bootcamp test
