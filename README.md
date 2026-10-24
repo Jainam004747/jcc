@@ -95,5 +95,3 @@ CI runs everything twice, once normally and once with jcc built with AddressSani
 - **C's type rules are mostly about memory.** Pointer arithmetic scales by element size, arrays decay to pointers, and struct members are padded to their alignment.
 - **The calling convention.** Which registers carry arguments, why `%rsp` must be 16-byte aligned at a `call`, and how variadic functions are told how many vector registers are used (`%al`).
 - **Test against a reference.** Comparing against gcc caught real bugs, and it also showed that tests with unspecified evaluation order are themselves wrong.
-
-Developed with AI assistance (Claude) as a learning project.
