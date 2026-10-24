@@ -40,6 +40,60 @@ make test                    # differential tests against gcc
 make asan                    # the same tests with AddressSanitizer watching jcc itself
 ```
 
+## Output
+
+Compiling and running a program with jcc:
+
+```text
+$ cat hello.c
+#include <stdio.h>
+int fib(int n) { return n < 2 ? n : fib(n - 1) + fib(n - 2); }
+int main() { printf("fib(20) = %d\n", fib(20)); return 0; }
+
+$ ./jcc hello.c -o hello && ./hello
+fib(20) = 6765
+```
+
+The calculator test program (a small parser, compiled by jcc):
+
+```text
+$ ./jcc tests/programs/20_calculator.c -o calc && ./calc
+1+2*3 = 7
+(1+2)*3 = 9
+100/7-2 = 12
+-(4+4)*2 = -16
+2*(3+(4-1))*5 = 60
+```
+
+N-queens solution counts for boards 1 to 8:
+
+```text
+$ ./jcc tests/programs/18_nqueens.c -o nq && ./nq
+1:1 2:0 3:0 4:2 5:10 6:4 7:40 8:92
+```
+
+An error message for a missing semicolon:
+
+```text
+$ ./jcc bad.c -o bad
+bad.c:1:24: error: expected ',' or ';'
+    int main() { int x = 5 return x; }
+                           ^
+```
+
+Test suite:
+
+```text
+$ make test
+47 passed, 0 failed
+
+$ make -C bootcamp test
+01_pointers: ok (int is 4 bytes, a pointer is 8 bytes)
+02_vector: ok
+03_hashmap: ok
+04_arena: ok
+```
+
 ## How it works
 
 ```
